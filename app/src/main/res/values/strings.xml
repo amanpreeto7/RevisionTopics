@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RevisionTopics</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Setting</string>
+    <string name="get_spinner_values">Get Spinner Values</string>
+
+    <string-array name="spinner_items">
+        <item name="apple">Apple</item>
+        <item name="mango">Mango</item>
+        <item name="banana">Banana</item>
+    </string-array>
+</resources>
