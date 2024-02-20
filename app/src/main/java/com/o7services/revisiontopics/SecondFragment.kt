@@ -1,12 +1,15 @@
 package com.o7services.revisiontopics
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.o7services.revisiontopics.databinding.FragmentSecondBinding
+import com.o7services.revisiontopics.databinding.SelectionDialogBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +27,8 @@ class SecondFragment : Fragment() {
     private var param2: String? = null
     lateinit var binding: FragmentSecondBinding
     lateinit var mainActivity: MainActivity
+    lateinit var recyclerClass: RecyclerClass
+    var messageDataClassArray = arrayListOf<MessageDataClass>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +50,34 @@ class SecondFragment : Fragment() {
             findNavController().popBackStack()
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerClass = RecyclerClass(messageDataClassArray)
+        binding.recyclerView.layoutManager = LinearLayoutManager(mainActivity)
+        binding.recyclerView.adapter = recyclerClass
+
+        binding.ibSend.setOnClickListener {
+            if(binding.etSendText.text.toString().trim().isNullOrEmpty()){
+                binding.etSendText.error = mainActivity.resources.getString(R.string.enter_text_to_send)
+                binding.etSendText.requestFocus()
+            }else{
+                var dialogBinding = SelectionDialogBinding.inflate(layoutInflater)
+                var customDialog = Dialog(mainActivity)
+                customDialog.setContentView(dialogBinding.root)
+                customDialog.show()
+
+                dialogBinding.btnSend.setOnClickListener {
+                    var id = if(dialogBinding.rbFirst.isChecked){
+                        0
+                    }else 1
+                    messageDataClassArray.add(MessageDataClass(id = id, message = binding.etSendText.text.toString()))
+                    customDialog.dismiss()
+                    recyclerClass.notifyDataSetChanged()
+                }
+            }
+        }
     }
 
     companion object {

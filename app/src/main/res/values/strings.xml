@@ -6,6 +6,14 @@
     <string name="profile">Profile</string>
     <string name="settings">Setting</string>
     <string name="get_spinner_values">Get Spinner Values</string>
+    <string name="left_text">Left Text</string>
+    <string name="right_text">Right Text</string>
+    <string name="msg">Message</string>
+    <string name="send_by">Message will be sent by</string>
+    <string name="first">First</string>
+    <string name="second">Second</string>
+    <string name="send">Send</string>
+    <string name="enter_text_to_send">Enter Text To Send</string>
 
     <string-array name="spinner_items">
         <item name="apple">Apple</item>
